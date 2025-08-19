@@ -1,0 +1,58 @@
+## Copy paste
+## .NET / ASP.NET Core standard
+bin/
+obj/
+out/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio / VS Code
+.vscode/
+.idea/
+
+# ASP.NET HTTPS cert 
+*.pfx
+*.p12
+
+# dotnet user secrets
+**/secrets.json
+
+# Rider settings
+*.DotSettings.user
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.old
+
+# Build results
+*.dll
+*.exe
+*.app
+*.so
+*.dylib
+
+# Publish folder
+publish/
+dist/
+
+# Node (om du har frontend med JS/React)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Environment config (om du har känslig data)
+.env
+.env.*
+
+# Paketlås
+package-lock.json
+yarn.lock
