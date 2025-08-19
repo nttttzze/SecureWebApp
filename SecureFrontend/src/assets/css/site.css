@@ -1,0 +1,88 @@
+/* Grid settings */
+.grid {
+    margin: 5%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.25rem;
+    width: 60%;
+    margin-right: auto;
+    margin-left: auto;
+    /* border-style: solid; */
+}
+
+.background {
+    position: absolute;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    background: linear-gradient(rgba(245, 241, 236, 0.527), rgba(8, 4, 2, 0.5));
+    z-index: -1;
+}
+
+.main-page {
+
+    height: 80px;
+    width: 90vw;
+    max-width: 800px;
+    padding: 20px;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.main-page h1 {
+    color: #9ec1b8;
+    font-size: 2em;
+    margin: .67em 0;
+}
+
+.mainTodo {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+
+}
+
+.center-buttons a {
+    text-decoration: none;
+    font-family: sans-serif;
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 3px;
+    padding: 12px 60px;
+    /* padding: 12px 100px; */
+    border: 0;
+    color: #000000;
+    background: #23824c;
+    line-height: 1.15;
+    font-size: 16px;
+    opacity: 0.88;
+
+}
+
+.center-buttons a:hover {
+    transition: all .1s ease;
+    box-shadow: 0 0 0 0 #fff, 0 0 0 3px #1de9b6;
+}
+
+
+
+/* Mobil */
+@media (max-width: 600px) {
+    .center-buttons a {
+        padding: 12px 20px;
+        font-size: 14px;
+        width: 70%;
+        margin-bottom: 2%;
+    }
+
+    .main-page h1 {
+        font-size: 1.5em;
+    }
+}
