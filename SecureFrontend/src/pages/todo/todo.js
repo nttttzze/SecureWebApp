@@ -1,5 +1,4 @@
 import * as http from "../../lib/helpers/httpClient.js";
-
 const todoList = document.querySelector("#list");
 
 const initApp = () => {

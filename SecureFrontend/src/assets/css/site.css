@@ -44,7 +44,86 @@
     left: 50%;
     top: 40%;
     transform: translate(-50%, -50%);
+    background-color: #e2e1e9;
+    border-radius: 10px;
+    padding: 2rem;
+}
 
+.taskList {
+    background-color: rgb(125, 211, 211);
+
+}
+
+ul li {
+    list-style: none;
+    font-size: 18px;
+    padding: 12px 8px 12px 50px;
+    user-select: none;
+    position: relative;
+}
+
+ul li::before {
+    content: '';
+    position: absolute;
+    height: 28px;
+    width: 28px;
+    border-radius: 50%;
+
+}
+
+ul li.checked {
+    color: #555;
+    text-decoration: line-through;
+
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #edeef0;
+    border-radius: 30px;
+    padding-left: 20px;
+    margin-bottom: 25px;
+
+}
+
+input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+
+}
+
+button {
+    border: none;
+    outline: none;
+    padding: 16px;
+    padding: 10px;
+    background-color: #ff5945;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+
+}
+
+ul li span {
+    position: absolute;
+    right: 0;
+    top: 5px;
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
+    color: #555;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 50%;
+}
+
+ul li span:hover {
+    background: #edeef0;
 }
 
 .center-buttons a {
