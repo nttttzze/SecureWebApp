@@ -25,12 +25,23 @@ public class AuthController(UserManager<User> userManager, IConfiguration config
     private readonly UserManager<User> _userManager = userManager;
     private readonly IConfiguration _config = config;
 
+
+    // Remove comment later
     [Authorize(Roles = "Admin")]
     [HttpPost("register")]
     public async Task<IActionResult> RegisterUser([FromBody] RegisterUserViewModel model)
     {
         try
         {
+            if (!ModelState.IsValid) return ValidationProblem();
+
+            model.UserName = _htmlSanitizer.Sanitize(model.UserName);
+            model.Password = _htmlSanitizer.Sanitize(model.Password);
+            ModelState.Clear();
+            TryValidateModel(model);
+
+            if (!ModelState.IsValid) return ValidationProblem();
+
             var user = new User
             {
                 //userName has to be an Email
@@ -55,8 +66,10 @@ public class AuthController(UserManager<User> userManager, IConfiguration config
     }
 
     [HttpPost("login")]
+    // ------------------------------------------
     //    "username": "test@gmail.com", (Admin)
     //   "password": "testPassword",
+    // ------------------------------------------
     public async Task<IActionResult> Login(LoginViewModel model)
     {
         try
@@ -86,10 +99,14 @@ public class AuthController(UserManager<User> userManager, IConfiguration config
     /* TOKEN SERVICE... */
     private string CreateToken(User user)
     {
+
+
         var claims = new List<Claim>
         {
             new(ClaimTypes.Name, user.UserName!),
         };
+
+
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["tokenSettings:tokenKey"]!));
         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);

@@ -17,7 +17,7 @@
     left: 0;
     width: 100vw;
     background: linear-gradient(rgba(245, 241, 236, 0.527), rgba(8, 4, 2, 0.5));
-    z-index: -1;
+    z-index: -99999999999999;
 }
 
 .main-page {
@@ -40,14 +40,46 @@
 }
 
 .mainTodo {
+    width: 30rem;
     position: absolute;
     left: 50%;
-    top: 40%;
+    top: 45%;
     transform: translate(-50%, -50%);
     background-color: #e2e1e9;
     border-radius: 10px;
     padding: 2rem;
+
+
 }
+
+#todo-form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#todo-form button {
+    margin-left: 15.4rem;
+}
+
+#input-box {
+    width: 10rem;
+}
+
+
+.todo-card {
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: ce;
+    align-items: center;
+}
+
+
+
 
 .taskList {
     background-color: rgb(125, 211, 211);
@@ -58,7 +90,7 @@ ul li {
     list-style: none;
     font-size: 18px;
     padding: 12px 8px 12px 50px;
-    user-select: none;
+    /* user-select: none; */
     position: relative;
 }
 
@@ -86,6 +118,7 @@ ul li.checked {
     padding-left: 20px;
     margin-bottom: 25px;
 
+
 }
 
 input {
@@ -94,9 +127,11 @@ input {
     outline: none;
     background: transparent;
 
+
 }
 
-button {
+#addBtn {
+
     border: none;
     outline: none;
     padding: 16px;
@@ -109,7 +144,21 @@ button {
 
 }
 
-ul li span {
+#delete-btn {
+    margin-left: auto;
+
+}
+
+.card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 10px;
+    width: 100%;
+}
+
+
+/* ul li span {
     position: absolute;
     right: 0;
     top: 5px;
@@ -120,7 +169,7 @@ ul li span {
     line-height: 40px;
     text-align: center;
     border-radius: 50%;
-}
+} */
 
 ul li span:hover {
     background: #edeef0;

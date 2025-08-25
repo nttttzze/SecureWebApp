@@ -10,6 +10,8 @@ public class RegisterUserViewModel : LoginViewModel
     // public string Username { get; set; } = "";
 
 
+
+
     [Required]
     [Compare("Password", ErrorMessage = "Paswords do not match.")]
     public string ConfirmPassword { get; set; } = "";

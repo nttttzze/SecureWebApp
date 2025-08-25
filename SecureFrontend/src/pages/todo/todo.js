@@ -1,34 +1,51 @@
-import * as http from "../../lib/helpers/httpClient.js";
-const todoList = document.querySelector("#list");
+// import * as http from "../../lib/helpers/httpClient.js";
+//  något fel i httpClient så satt "get" här
+// Flytta ut till httpClient när allt fungerar
+
+export const get = async () => {
+  const url = "https://localhost:5001/api/TodoList";
+
+  try {
+    const urlResponse = await fetch(url);
+    if (urlResponse.ok) {
+      return await urlResponse.json();
+    } else {
+      throw new Error(
+        `Something went wrong ${urlResponse.status}, ${urlResponse.statusText}`
+      );
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const todoList = document.querySelector("#list-container");
 
 const initApp = () => {
-  console.log("test test pls work");
   loadList();
 };
 
 const loadList = async () => {
-  const result = await http.get("TodoList");
+  const result = await get("https://localhost:5001/api/TodoList");
   console.log("Data: ", result);
+  todoList.innerHTML = "";
 
   result.todo.forEach((list) => {
     todoList.appendChild(createHtml(list));
   });
 };
 
-const createHtml = (list) => {
-  const display = document.createElement("div");
-
-  let html = `<section class="card">
-
-    <div class="card-body">
-    <h3 class="p-name"> ${list.Id} </h3>
-    <h3 class="p-name"> ${list.Task} </h3>
+export const createHtml = (todo) => {
+  const li = document.createElement("li");
+  li.classList.add("todo-card");
+  li.innerHTML = `
+    <div class="card">
+      <span>${todo.task}
+            
+      </span>
+      <button class="delete-btn" data-id="${todo.id}">X</button>
     </div>
-    `;
-
-  display.innerHTML = html;
-  return display;
+  `;
+  return li;
 };
 document.addEventListener("DOMContentLoaded", initApp);
-
-// ???????????????????????????????????? npgot fel. Kanske i httpClient

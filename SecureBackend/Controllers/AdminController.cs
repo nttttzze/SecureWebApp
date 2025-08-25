@@ -16,6 +16,7 @@ using SecureWebApp.ViewModels;
 
 namespace SecureWebApp.Controllers;
 
+// Använd fär att göra user till Admin i postman !
 [Authorize(Roles = "Admin")]
 [ApiController]
 [Route("api/[controller]")]

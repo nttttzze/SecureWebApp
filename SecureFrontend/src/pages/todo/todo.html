@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="module" src="./todo.js"></script>
+    <script type="module" src="./deleteTodo.js"></script>
+    <script type="module" src="./addTodo.js"></script>
     <script type="module" src="../../lib/helpers/script.js"></script>
     <link rel="stylesheet" href="../../assets/css/site.css">
     <title>Todo List</title>
@@ -15,30 +17,31 @@
         <!-- empty -->
     </header>
     <main>
-
+        <div class="background"></div>
 
         <div class="mainTodo">
             <div class="todo-app">
                 <h2>To-Do list</h2>
                 <div class="row">
-                    <input type="text" id="input-box" placeholder="Add task">
-                    <button>Add</button>
+                    <form id="todo-form">
+                        <input type="text" id="input-box" name="task" placeholder="Add task">
+                        <button id="addBtn" type="submit">Add</button>
+                    </form>
+
                 </div>
+
                 <ul id="list-container">
                     <!-- <li class="checked">Task 1</li>
                     <li>Task 2</li>
                     <li>Task 3</li> -->
                 </ul>
+
             </div>
+            <a class="registerLink" href="../login/index.html">Login Page</a>
 
 
         </div>
 
-
-
-        <div id="list" class="grid">
-            <!-- list -->
-        </div>
     </main>
 </body>
 

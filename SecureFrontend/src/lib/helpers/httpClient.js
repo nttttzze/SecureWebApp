@@ -19,7 +19,7 @@ export const get = async (endpoint) => {
   }
 };
 
-export const post = async (endpoint, data) => {
+export const authPost = async (endpoint, data) => {
   const url = `${config.apiUrl}/${endpoint}`;
 
   try {
@@ -37,6 +37,31 @@ export const post = async (endpoint, data) => {
     } else if (urlResponse.status === 401) {
       alert("You are not logged in");
       location.reload();
+    } else {
+      throw new Error(
+        `POST misslyckades: ${urlResponse.status}, ${urlResponse.statusText}`
+      );
+    }
+  } catch (error) {
+    console.error("Something went wrong on POST", error);
+    return null;
+  }
+};
+
+export const post = async (endpoint, data) => {
+  const url = `${config.apiUrl}/${endpoint}`;
+
+  try {
+    const urlResponse = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (urlResponse.ok) {
+      return await urlResponse.json();
     } else {
       throw new Error(
         `POST misslyckades: ${urlResponse.status}, ${urlResponse.statusText}`
