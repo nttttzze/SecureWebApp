@@ -19,18 +19,18 @@ const register = async (e) => {
 
   try {
     var url = "https://localhost:5001/api/auth/register";
-    const respone = await fetch(url, {
+    const response = await fetch(url, {
       method: "POST",
+      credentials: "include",
       headers: {
-        "content-type": "application/json",
-        Authorization: "bearer " + user.token,
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(registerInfo),
     });
     console.log("Data: ", registerData, "Info: ", registerInfo);
 
-    if (respone.ok) {
-      const result = await respone.json();
+    if (response.ok) {
+      const result = await response.json();
       alert("User registered");
 
       console.log(result);

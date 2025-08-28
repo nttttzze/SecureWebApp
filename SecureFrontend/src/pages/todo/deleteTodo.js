@@ -6,6 +6,7 @@ export const taskDelete = async (id) => {
   try {
     const urlResponse = await fetch(url, {
       method: "DELETE",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
         // Authorization: "bearer " + user.token,

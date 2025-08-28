@@ -9,6 +9,7 @@ export const post = async (data) => {
     console.log("POST sending:", data);
     const urlResponse = await fetch(url, {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },

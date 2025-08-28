@@ -15,7 +15,7 @@ using SecureWebApp.ViewModels;
 
 namespace SecureWebApp.Controllers;
 
-// [Authorize(Roles = "User, Admin")]
+
 [ApiController]
 [Route("api/[controller]")]
 public class TodoListController(DataContext context) : ControllerBase
@@ -33,8 +33,9 @@ public class TodoListController(DataContext context) : ControllerBase
             list.Task
         }).ToListAsync();
         return Ok(new { success = true, Todo = list });
-
     }
+
+    [Authorize(Policy = "AdminOnly")]
     [HttpPost("addTask")]
     public async Task<ActionResult> AddTask(TodoListPostViewModel model)
     {
@@ -63,7 +64,7 @@ public class TodoListController(DataContext context) : ControllerBase
         }
     }
 
-
+    [Authorize(Policy = "UserAndAdmin")]
     [HttpDelete("delete/{id}")]
     public async Task<ActionResult> DeleteTask(int id)
     {
@@ -79,7 +80,7 @@ public class TodoListController(DataContext context) : ControllerBase
 
         return Ok(new { success = true, message = "Task removed" });
     }
-
+    [Authorize(Policy = "UserOnly")]
     [HttpPatch("update/{id}")]
     public async Task<ActionResult> UpdateTask(int id, [FromBody] UpdateTaskDto dto)
     {

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../../assets/css/login-form.css">
     <link rel="stylesheet" href="../../assets/css/site.css">
     <script type="module" src="./login.js"></script>
+    <script type="module" src="../../lib/helpers/script.js"></script>
     <title>Login</title>
 </head>
 
@@ -25,7 +26,7 @@
                     <form id="login-form">
                         <div class="login-c">
                             <label for="userName">Login</label>
-                            <input type="text" placeholder="Username" name="userName" id="userName" required />
+                            <input type="text" placeholder="Username" name="email" id="email" required />
                         </div>
 
                         <div class="login-c">
@@ -36,6 +37,7 @@
 
 
                         <div class="login-c"> <button type="submit" class="login-button">Login</button> </div>
+
                         <a class="registerLink" href="../register/register.html">Register</a>
                         <a class="todoLink" href="../todo/todo.html">Todo List</a>
 
@@ -43,6 +45,7 @@
 
                 </article>
             </div>
+            <button id="logoutBtn" class="login-button">Log out</button>
         </div>
     </main>
 

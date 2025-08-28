@@ -2,14 +2,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SecureWebApp.Entities;
 
-public class DataContext : IdentityDbContext<User>
+public class DataContext(DbContextOptions options) : IdentityDbContext<User>(options)
 {
     public DbSet<Todo> Todo { get; set; }
-
-
-
-    public DataContext(DbContextOptions options) : base(options)
-    {
-
-    }
 }

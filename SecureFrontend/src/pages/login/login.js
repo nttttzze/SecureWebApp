@@ -10,24 +10,29 @@ const login = async (e) => {
   const loginInfo = Object.fromEntries(loginData.entries());
 
   try {
-    var url = "https://localhost:5001/api/auth/login";
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(loginInfo),
-    });
+    // var url = "https://localhost:5001/api";
+
+    const response = await fetch(
+      "https://localhost:5001/api/login?useCookies=true",
+      {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(loginInfo),
+      }
+    );
     console.log("Data:", loginData, "Info:", loginInfo);
 
     if (response.ok) {
-      const result = await response.json();
-      console.log(result);
-      const user = {
-        userName: result.userName,
-        token: result.token,
-      };
-      sessionStorage.setItem("user", JSON.stringify(user));
+      // const result = await response.json();
+      // console.log(result);
+      // const user = {
+      //   userName: result.userName,
+      //   token: result.token,
+      // };
+      // sessionStorage.setItem("user", JSON.stringify(user));
       alert("You are logged in!");
     } else {
       console.log(response.status, response.statusText);

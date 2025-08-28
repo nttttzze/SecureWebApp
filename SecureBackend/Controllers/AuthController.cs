@@ -19,15 +19,14 @@ namespace SecureWebApp.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class AuthController(UserManager<User> userManager, IConfiguration config) : ControllerBase
+public class AuthController(UserManager<User> userManager, SignInManager<User> signInManager) : ControllerBase
 {
     private readonly HtmlSanitizer _htmlSanitizer = new();
     private readonly UserManager<User> _userManager = userManager;
-    private readonly IConfiguration _config = config;
 
 
-    // Remove comment later
-    [Authorize(Roles = "Admin")]
+    // Remove test comments later
+    [Authorize(Policy = "AdminOnly")]
     [HttpPost("register")]
     public async Task<IActionResult> RegisterUser([FromBody] RegisterUserViewModel model)
     {
@@ -55,7 +54,7 @@ public class AuthController(UserManager<User> userManager, IConfiguration config
             {
                 // Gives new user the "User" role on registration.
                 await _userManager.AddToRoleAsync(user, "User");
-                return StatusCode(201, "User registered succesfully");
+                return StatusCode(201, new { success = true, message = "User registered succesfully" });
             }
             return BadRequest(new { success = false, message = result.Errors });
         }
@@ -65,61 +64,16 @@ public class AuthController(UserManager<User> userManager, IConfiguration config
         }
     }
 
-    [HttpPost("login")]
-    // ------------------------------------------
-    //    "username": "test@gmail.com", (Admin)
-    //   "password": "testPassword",
-    // ------------------------------------------
-    public async Task<IActionResult> Login(LoginViewModel model)
+    [HttpPost("badlogin")]
+    public ActionResult BadLogin()
     {
-        try
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-
-            }
-            var user = await _userManager.FindByNameAsync(model.UserName);
-
-            if (user is null || !await _userManager.CheckPasswordAsync(user, model.Password))
-            {
-                return Unauthorized(new { success = false, message = "Unauthorized" });
-            }
-            return Ok(new { success = true, user.UserName, token = CreateToken(user) });
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, new { success = false, message = ex.Message });
-        }
-
-
-
+        return Ok();
     }
-
-    /* TOKEN SERVICE... */
-    private string CreateToken(User user)
+    [HttpPost("logout")]
+    public async Task<ActionResult> Logout()
     {
-
-
-        var claims = new List<Claim>
-        {
-            new(ClaimTypes.Name, user.UserName!),
-        };
-
-
-
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["tokenSettings:tokenKey"]!));
-        var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
-
-        var options = new JwtSecurityToken(
-            issuer: null,
-            audience: null,
-            claims: claims,
-            expires: DateTime.Now.AddDays(10),
-            signingCredentials: credentials
-        );
-
-        return new JwtSecurityTokenHandler().WriteToken(options);
+        await signInManager.SignOutAsync();
+        return NoContent();
     }
 
 }

@@ -4,5 +4,5 @@ then: "dotnet run"
 
     // ------------------------------------------
     //   "username": "test@gmail.com", (Admin)
-    //   "password": "testPassword",
+    //   "password": "testPassword1@",
     // ------------------------------------------

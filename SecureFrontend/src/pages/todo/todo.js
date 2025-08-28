@@ -2,22 +2,22 @@
 //  något fel i httpClient så satt "get" här
 // Flytta ut till httpClient när allt fungerar
 
-export const get = async () => {
-  const url = "https://localhost:5001/api/TodoList";
+// export const get = async () => {
+//   const url = "https://localhost:5001/api/TodoList";
 
-  try {
-    const urlResponse = await fetch(url);
-    if (urlResponse.ok) {
-      return await urlResponse.json();
-    } else {
-      throw new Error(
-        `Something went wrong ${urlResponse.status}, ${urlResponse.statusText}`
-      );
-    }
-  } catch (error) {
-    console.error(error);
-  }
-};
+//   try {
+//     const urlResponse = await fetch(url);
+//     if (urlResponse.ok) {
+//       return await urlResponse.json();
+//     } else {
+//       throw new Error(
+//         `Something went wrong ${urlResponse.status}, ${urlResponse.statusText}`
+//       );
+//     }
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
 
 const todoList = document.querySelector("#list-container");
 
@@ -26,11 +26,22 @@ const initApp = () => {
 };
 
 const loadList = async () => {
-  const result = await get("https://localhost:5001/api/TodoList");
-  console.log("Data: ", result);
+  const response = await fetch("https://localhost:5001/api/TodoList", {
+    method: "GET",
+    mode: "cors",
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new error(`HTTP error! Status: ${response.status}`);
+  }
+  const data = await response.json();
   todoList.innerHTML = "";
 
-  result.todo.forEach((list) => {
+  console.log("Data: ", response);
+  todoList.innerHTML = "";
+
+  data.todo.forEach((list) => {
     todoList.appendChild(createHtml(list));
   });
 };

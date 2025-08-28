@@ -44,3 +44,14 @@
 //   listContainer.innerHTML = localStorage.getItem("data");
 // }
 // showTask();
+
+document.querySelector("#logoutBtn").addEventListener("click", logout);
+export async function logout() {
+  alert("You are logged out");
+
+  const response = await fetch("https://localhost:5001/api/auth/logout", {
+    method: "POST",
+    credentials: "include",
+  });
+  console.log(response);
+}
