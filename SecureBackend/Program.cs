@@ -65,6 +65,7 @@ builder.Services.AddCors();
 builder.Services.AddIdentityApiEndpoints<User>(options =>
 {
     options.User.RequireUniqueEmail = true;
+
 })
 .AddRoles<IdentityRole>()
 .AddEntityFrameworkStores<DataContext>();
@@ -74,6 +75,7 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.SameSite = SameSiteMode.None;  // för cross-origin
     options.Cookie.SecurePolicy = CookieSecurePolicy.Always; // HTTPS
+
 });
 
 builder.Services.AddControllers();
@@ -134,15 +136,6 @@ if (app.Environment.IsDevelopment())
 {
     app.UseHsts();
 }
-
-// new CookieOptions
-// {
-//     HttpOnly = true,
-//     Secure = true,
-//     SameSite = SameSiteMode.Strict,
-//     Expires = DateTime.UtcNow.AddHours(1)
-
-// };
 
 app.UseHttpsRedirection();
 

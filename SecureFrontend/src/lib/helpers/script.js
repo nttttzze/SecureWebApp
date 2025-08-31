@@ -47,11 +47,15 @@
 
 document.querySelector("#logoutBtn").addEventListener("click", logout);
 export async function logout() {
-  alert("You are logged out");
-
   const response = await fetch("https://localhost:5001/api/auth/logout", {
     method: "POST",
     credentials: "include",
   });
+  if (response.status === 401) {
+    alert("You are not logged in!");
+  } else if (response.status === 204) {
+    alert("You are logged out");
+  }
+
   console.log(response);
 }

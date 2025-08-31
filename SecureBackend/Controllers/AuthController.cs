@@ -69,6 +69,7 @@ public class AuthController(UserManager<User> userManager, SignInManager<User> s
     {
         return Ok();
     }
+    [Authorize(Policy = "UserAndAdmin")]
     [HttpPost("logout")]
     public async Task<ActionResult> Logout()
     {
